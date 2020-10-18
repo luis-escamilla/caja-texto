@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Inputs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>Crear cajas de texto</h1>
+        <br>
+        <h5>Agrega el numero de cajas de texto que deseas crear</h5>
+        <br>
+        <div class="form-row align-items-center">
+            <div class="form-group col-md-6">
+                <input type="number" id="nTabla" min="1" max="10" class="form-group" value="2">
+                <button onclick="agregar()" class="btn btn-dark">Crear cajas</button>
+            </div>
+
+            <div id="generados">
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var incremento = 0;
+
+        function agregar(obj) {
+            var numero = parseInt(document.getElementById("nTabla").value);
+            for (i = 1; i <= numero; i++) {	
+            incremento++;
+            bloque = document.getElementById('generados');
+            elementotxt = document.createElement('input');
+            elementotxt.setAttribute("class", "custom-input custom-input-sm-1 mb-3");
+            elementotxt.setAttribute("placeholder", "Texto "+incremento);
+            elementotxt.id = 'input' + incremento;
+            bloque.appendChild(elementotxt);
+
+            elementobtn = document.createElement('button');
+            elementobtn.setAttribute("class", "custom-input custom-input-sm-1 mb-2 btn-primary");
+            elementobtn.innerHTML = "Boton no " + incremento;
+            elementobtn.id = 'boton' + incremento;
+            elementobtn.addEventListener("click", (function(tId, bId){
+				return function(){
+                    alert("" + document.getElementById(tId).value );
+                    console.log(document.getElementById(tId).value);
+				}
+
+			}
+			)("input"+incremento, "boton"+incremento),false);
+            bloque.appendChild(elementobtn);
+            var br = document.createElement('br');
+            bloque.appendChild(br);
+            }
+        }
+
+    </script>
+</body>
+
+
+
+</html> 
